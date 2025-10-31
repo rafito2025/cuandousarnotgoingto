@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Going To - Negative Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .explanation {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: expandIn 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes expandIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .translatable {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            padding: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        .translatable::after {
+            content: attr(data-translation);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: #667eea;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-size: 1em;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 5px;
+        }
+
+        .translatable::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #667eea;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .translatable:hover {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .translatable:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        .translatable:hover::before {
+            opacity: 1;
+        }
+
+        .example-section {
+            margin-top: 40px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-title {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .visual-example {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .image-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cancel-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 100px;
+            color: #ff4757;
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+            animation: cancelPop 0.6s ease-out 0.5s forwards;
+            z-index: 10;
+        }
+
+        @keyframes cancelPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .sentence {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .sentence p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .formula {
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .visual-example {
+                flex-direction: column;
+            }
+            
+            .image-container {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚫 Be Going To - Negative Form</h1>
+        <p class="subtitle">Learn how to express plans or intentions that will NOT happen</p>
+
+        <div class="explanation">
+            <p style="font-size: 1.1em; line-height: 1.8; color: #333;">
+                <span class="translatable" data-translation="Veamos cómo usar">Let's see how to use</span> 
+                <span class="translatable" data-translation="la forma negativa">the negative form</span> 
+                <span class="translatable" data-translation="de">of</span> 
+                <span class="highlight">"be going to"</span>, 
+                <span class="translatable" data-translation="que se usa para hablar">which is used to talk about</span> 
+                <span class="translatable" data-translation="de planes o intenciones futuras">future plans or intentions</span> 
+                <span class="translatable" data-translation="que no van a suceder">that are NOT going to happen</span>.
+            </p>
+
+
+        </div>
+
+        <div class="example-section">
+            <h2 style="color: #764ba2; margin-bottom: 25px; text-align: center;">📝 Examples</h2>
+
+            <div class="example-card">
+                <div class="example-title">Example 1: Travel Plans Cancelled</div>
+                <div class="visual-example">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400" alt="Airplane">
+                        <div class="cancel-icon">❌</div>
+                    </div>
+                    <div class="sentence">
+                        <p>
+                            <span class="translatable" data-translation="Ella">She</span> 
+                            <span class="highlight">is not going to</span> 
+                            <span class="translatable" data-translation="viajar">travel</span> 
+                            <span class="translatable" data-translation="a París">to Paris</span> 
+                            <span class="translatable" data-translation="este verano">this summer</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-title">Example 2: Food Decision</div>
+                <div class="visual-example">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400" alt="Pizza">
+                        <div class="cancel-icon">❌</div>
+                    </div>
+                    <div class="sentence">
+                        <p>
+                            <span class="translatable" data-translation="Nosotros">We</span> 
+                            <span class="highlight">are not going to</span> 
+                            <span class="translatable" data-translation="comer">eat</span> 
+                            <span class="translatable" data-translation="pizza">pizza</span> 
+                            <span class="translatable" data-translation="esta noche">tonight</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-title">Example 3: Weather Activity</div>
+                <div class="visual-example">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?w=400" alt="Swimming">
+                        <div class="cancel-icon">❌</div>
+                    </div>
+                    <div class="sentence">
+                        <p>
+                            <span class="translatable" data-translation="Él">He</span> 
+                            <span class="highlight">is not going to</span> 
+                            <span class="translatable" data-translation="nadar">swim</span> 
+                            <span class="translatable" data-translation="hoy">today</span> 
+                            <span class="translatable" data-translation="porque está lloviendo">because it's raining</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
